@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\TimekitController.cs" />
     <Compile Include="Models\Filters.cs" />
     <Compile Include="Models\ResponseObjects\BaseResponse.cs" />

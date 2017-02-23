@@ -55,10 +55,13 @@ namespace Timekit
         }
 
 
-        public async Task<TimekitTimesResponse> GetAllTimesAsync(string email1, string email2, string timezone1, string timezone2, string length, int days = 4)
+        
+        public async Task<TimekitTimesResponse> GetAllTimesAsync(string email1, string email2, string timezone1, string timezone2, string length, int days)
         {
 
             TimekitTimesResponse returnValue = new TimekitTimesResponse();
+
+            //Step 1: Sync the Provider's Calendar
 
             var payload =
                 new JObject(
@@ -169,6 +172,61 @@ namespace Timekit
                 returnValue.ErrorMessage = e.Message;
                 returnValue.Success = false;
             }
+
+            return returnValue;
+        }
+
+        public async Task<string> CreateBookingAsync(string email1, string email2, string timezone)
+        {
+
+            string returnValue = "";
+
+            //var payload =
+            //    new JObject(
+            //        new JProperty("email", email),
+            //        new JProperty("timezone", timezone),
+            //        new JProperty("first_name", firstname),
+            //        new JProperty("last_name", lastname)
+            //    );
+            //string ex = JToken.Parse(payload.ToString()).ToString();
+
+            //var content = new StringContent(payload.ToString(), System.Text.Encoding.UTF8, "application/json");
+
+            //try
+            //{
+            //    var resp = await Client.PostAsync(TIMEKIT_API_USERS_URL, content);
+            //    var respstring = await resp.Content.ReadAsStringAsync();
+            //    var substring = JObject.Parse(respstring).SelectToken("data");
+            //    var valstoreturn = JsonConvert.DeserializeObject<TimekitUser>(substring.ToString());
+
+            //    returnValue.RootObject = valstoreturn;
+            //    returnValue.Success = valstoreturn != null;
+            //}
+            //catch (JsonSerializationException jsonException)
+            //{
+            //    returnValue.ErrorMessage = jsonException.Message;
+            //    returnValue.Success = false;
+            //}
+            //catch (HttpRequestException httpException)
+            //{
+            //    if (httpException.Message.Contains("401"))
+            //        returnValue.ErrorMessage = "The client was not authorized. Did you call ServicesInitializer.Initialize()?";
+            //    else if (httpException.Message.Contains("406"))
+            //        returnValue.ErrorMessage = "The client was authorized, but the request did not have the proper headers fixed. Did you call ServicesInitializer.Initialize()?";
+            //    else if (httpException.Message.Contains("501"))
+            //        returnValue.ErrorMessage = "The request URL was bad.";
+            //    else if (httpException.Message.Contains("422"))
+            //        returnValue.ErrorMessage = "Unproccesable Entity";
+            //    else
+            //        returnValue.ErrorMessage = httpException.Message;
+
+            //    returnValue.Success = false;
+            //}
+            //catch (Exception e)
+            //{
+            //    returnValue.ErrorMessage = e.Message;
+            //    returnValue.Success = false;
+            //}
 
             return returnValue;
         }

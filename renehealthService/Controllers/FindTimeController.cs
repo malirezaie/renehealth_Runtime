@@ -37,9 +37,9 @@ namespace renehealthService.Controllers
        
         // GET api/time/v0.1
         [HttpGet, Route("findtime")]
-        public async Task<AvailableTimes> FindAllTimes(string email1, string email2, string timezone, string interval = "30 minutes")
+        public async Task<AvailableTimes> FindAllTimes(string email1, string email2, string timezone1, string timezone2, int numDays = 7, string interval = "30 minutes")
         {
-            var result = await TimeKitController.Instance.GetAllTimesAsync(email1, email2, timezone, "america/los_angeles",interval);
+            var result = await TimeKitController.Instance.GetAllTimesAsync(email1, email2, timezone1, timezone2,interval, numDays);
 
             var response = new AvailableTimes(result.RootObject);
 
