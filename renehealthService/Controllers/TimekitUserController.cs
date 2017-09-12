@@ -38,7 +38,7 @@ namespace renehealthService.Controllers
                 var newUser = new TimeKitUser(result.RootObject);
 
                 //1. Get tag from DB in connected context in case we need to update
-                var originalEntity = await context.TimeKitUsers.FindAsync(newUser.email);
+                var originalEntity = await context.TimeKitUsers.FindAsync(newUser.email,newUser.first_name);
 
                 //2. Check to see if we found an existing entry, otherwise skip to 5
                 if (originalEntity != null)
@@ -47,7 +47,7 @@ namespace renehealthService.Controllers
                     //newUser.UpdateEntityData(originalEntity);
 
                     //4. Set the values on the original entity
-                    //context.Entry(originalEntity).CurrentValues.SetValues(newUser);
+                    context.Entry(originalEntity).CurrentValues.SetValues(newUser);
                 }
                 else
                 {
